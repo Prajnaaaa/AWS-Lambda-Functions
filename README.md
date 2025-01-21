@@ -1,19 +1,50 @@
 # AWS-Lambda-Functions
-1. Add Two Numbers
-Create a Lambda function in Python:
-def lambda_handler(event, context):
-    num1 = event.get('num1')
-    num2 = event.get('num2')
-    return {"sum": num1 + num2}
-    
-2. Store a Document in S3
-import boto3
-def lambda_handler(event, context):
-    s3 = boto3.client('s3')
-    bucket_name = "your-bucket-name"
-    file_content = event['file_content']
-    file_name = event['file_name']
 
-    s3.put_object(Bucket=bucket_name, Key=file_name, Body=file_content)
-    return {"message": "File uploaded successfully"}
+This repository contains two AWS Lambda functions:
+1. **AddTwoNumbers**: A function that adds two numbers and returns the result.
+2. **StoreDocumentInS3**: A function that stores a document or PDF file in an S3 bucket.
+
+Task 1: AddTwoNumbers
+Description:
+This function takes two numbers as input and returns their sum.
+
+Sample Input:
+```json
+{
+    "num1": 5,
+    "num2": 10
+}
+Sample Output:
+
+{
+    "statusCode": 200,
+    "body": {
+        "num1": 5,
+        "num2": 10,
+        "sum": 15
+    }
+}
+
+Task 2: StoreDocumentInS3
+Description:
+This function takes a Base64 encoded document and stores it in the specified S3 bucket.
+
+Sample Input:
+
+{
+    "file_content": "VGhpcyBpcyBhIHRlc3QgZG9jdW1lbnQ=",
+    "file_name": "test-document.txt"
+}
+
+Sample Output:
+
+{
+    "statusCode": 200,
+    "body": "File test-document.txt uploaded successfully to my-document-storage!"
+}
+
+Technologies Used:
+AWS Lambda
+Python
+S3
 
